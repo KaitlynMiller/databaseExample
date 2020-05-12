@@ -1,0 +1,53 @@
+<p-button (onClick)="showNewPersonDialog()" icon="pi pi-user-plus"></p-button>
+<p-button (onClick)="showSearchPersonDialog()" icon="pi pi-search"></p-button>
+
+<p-table [value]="people">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Address</th>
+      <th>Phone</th>
+      <th>Commands</th>
+    </tr>
+  </ng-template>
+  <ng-template let-person pTemplate="body">
+    <tr>
+      <td>{{person.firstName}}</td>
+      <td>{{person.lastName}}</td>
+      <td>{{person.address}}</td>
+      <td>{{person.phone}}</td>
+      <td>
+        <p-button (onClick)="deletePerson(person)" icon="pi pi-trash"></p-button>
+        &nbsp;
+        &nbsp;
+        <p-button (onClick)="showUpdatePersonDialog(person)" icon="pi pi-pencil"></p-button>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+
+<p-dialog [(visible)]="personDialogVisible" header="Title">
+  First Name <input [(ngModel)]="person.firstName" pInputText type="text"/>
+  Last Name <input [(ngModel)]="person.lastName" pInputText type="text"/>
+  Address <input [(ngModel)]="person.address" pInputText type="text"/>
+  Phone <input [(ngModel)]="person.phone" pInputText type="text"/>
+  <p-footer>
+    <button (click)="createUpdatePerson()" icon="pi pi-check" label="Ok" pButton type="button"></button>
+    <button (click)="personDialogVisible=false" class="ui-button-secondary" icon="pi pi-times" label="Cancel" pButton
+            type="button"></button>
+  </p-footer>
+</p-dialog>
+
+<p-dialog [(visible)]="searchPersonDialogVisible" header="Title">
+  First Name <input [(ngModel)]="search.firstName" pInputText type="text"/>
+  Last Name <input [(ngModel)]="search.lastName" pInputText type="text"/>
+  Address <input [(ngModel)]="search.address" pInputText type="text"/>
+  Phone <input [(ngModel)]="search.phone" pInputText type="text"/>
+  <p-footer>
+    <button (click)="searchPerson()" icon="pi pi-check" label="Ok" pButton type="button"></button>
+    <button (click)="searchPersonDialogVisible=false" class="ui-button-secondary" icon="pi pi-times" label="Cancel" pButton
+            type="button"></button>
+  </p-footer>
+</p-dialog>
